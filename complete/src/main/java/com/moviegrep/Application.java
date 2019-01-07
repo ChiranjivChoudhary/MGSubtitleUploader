@@ -1,4 +1,4 @@
-package hello;
+package com.moviegrep;
 
 import java.util.Arrays;
 
