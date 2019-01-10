@@ -1,0 +1,3 @@
+com\moviegrep\Application.class
+com\moviegrep\manager\UploadFileMananger.class
+com\moviegrep\controller\MoviegrepSubtitleUploadController.class
