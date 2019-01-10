@@ -1,9 +1,5 @@
 package com.moviegrep.controller;
 
-import static org.mockito.Mockito.RETURNS_DEEP_STUBS;
-
-import java.lang.ref.Reference;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -31,6 +27,16 @@ public class MoviegrepSubtitleUploadController {
 	public ResponseEntity<String> uploadSubTitleFile(@RequestParam("file") MultipartFile file,
 			RedirectAttributes redirectAttributes) {
 		String response = ufManager.uploadFile(file);
+		if (response == null)
+			return ResponseEntity.ok("File uploaded successfully!!!");
+		else
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
+	}
+	
+	@PostMapping("/UploadFiles")
+	public ResponseEntity<String> uploadSubTitleFiles(@RequestParam("directoryPath") String directoryPath,
+			RedirectAttributes redirectAttributes) {
+		String response = ufManager.uploadFiles(directoryPath);
 		if (response == null)
 			return ResponseEntity.ok("File uploaded successfully!!!");
 		else
