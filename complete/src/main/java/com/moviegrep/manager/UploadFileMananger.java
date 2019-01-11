@@ -5,6 +5,7 @@ import java.io.FileOutputStream;
 
 import javax.annotation.PostConstruct;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
@@ -18,13 +19,13 @@ public class UploadFileMananger {
 	ApiClient apiClient;
 	MediaApi mediaApi;
 
+	@Value("${url.basePath}")
+	private String urlBasePath;
+
 	@PostConstruct
 	private void intialise() {
-
-		String basePath = "http://localhost:49994";
-
 		apiClient = new ApiClient();
-		apiClient.setBasePath(basePath);
+		apiClient.setBasePath(urlBasePath);
 		apiClient.setConnectTimeout(990000);
 		mediaApi = new MediaApi();
 		mediaApi.setApiClient(apiClient);
